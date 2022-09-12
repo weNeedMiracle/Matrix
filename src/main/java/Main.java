@@ -1,14 +1,21 @@
 public class Main {
     public static void main(String[] args) {
-    Matrica mat1 = new Matrica();
-    mat1.get(5,3);
-    mat1.u = 3;
-    mat1.sozdat(mat1.a, mat1.b);
-    System.out.println("Сложение матриц:");
-    mat1.sloz(mat1.m1, mat1.m2);
-    System.out.println("Матрица умноженная на число:");
-    mat1.unch(mat1.m1, mat1.u);
-    System.out.println("Умноженая матрица:");
-    mat1.umMat(mat1.m1, mat1.m2);
+    Matrica mc = new Matrica(2, 2);
+    Matrica mc2 = new Matrica(2, 2);
+    Matrica mc3 = new Matrica(2,2);
+    Matrica mc4 = new Matrica(2,2);
+    Matrica mc5 = new Matrica(2,2);
+    mc.vivod();
+    System.out.println();
+    mc2.vivod();
+    System.out.println();
+    mc3 = mc.sloz(mc2);
+    mc3.vivod();
+    System.out.println();
+    mc4 = mc.unch(2);
+    mc4.vivod();
+    System.out.println();
+    mc5 = mc.umMat(mc2);
+    mc5.vivod();
     }
 }

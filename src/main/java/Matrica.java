@@ -1,83 +1,78 @@
 import java.util.Random;
 
 public class Matrica {
-    Random rd = new Random();
     int a;
     int b;
-    int[][] m1;
-    int[][] m2;
-    int u;
+    int[][] m;
 
-    void get(int a, int b){
+
+    public Matrica(int a, int b){
+        Random rd = new Random();
+        m = new int[a][b];
+        for(int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m[i].length; j++) {
+                 set(i,j, rd.nextInt(11));
+            }
+        }
         this.a = a;
         this.b = b;
     }
+    public void set(int a, int b, int c){
+        m[a][b] = c;
+    }
 
-    void sozdat(int a, int b){
-        int[][] m1 = new int[a][b];
-        int[][] m2 = new int[a][b];
-        for (int i = 0; i < m1.length; i++){
-            for(int j = 0; j < m1[i].length; j++){
-                m1[i][j] = rd.nextInt(11);
-                System.out.print(m1[i][j] + " ");
-            }
-            System.out.println();
-        }
-        System.out.println();
-        for (int i = 0; i < m2.length; i++){
-            for(int j = 0; j < m2[i].length; j++){
-                m2[i][j] =rd.nextInt(11);
-                System.out.print(m2[i][j]+" ");
-            }
-            System.out.println();
-        }
-        System.out.println();
-        this.m1 = m1;
-        this.m2 = m2;
+    public int get(int a, int b){
+        return m[a][b];
     }
-    void sloz(int[][] m1, int[][] m2){
-        int[][] sum = new int[m1.length][m1[0].length];
-        for(int i = 0; i < m1.length || i < m2.length; i++){
-            for(int j = 0; j < m1[i].length || j < m2[i].length; j++){
-                sum[i][j] = m1[i][j]+m2[i][j];
-                System.out.print(sum[i][j]+" ");
+
+    void vivod() {
+        for (int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m[i].length; j++) {
+                System.out.print(get(i, j) + " ");
             }
             System.out.println();
         }
-        System.out.println();
     }
-    void unch(int[][] m1, int u){
-        int[][] m = new int[m1.length][m1[0].length];
-        for(int i = 0; i < m1.length; i++){
-            for(int j = 0; j < m1[i].length; j++){
-                m[i][j] = m1[i][j]*u;
-                System.out.print(m[i][j]+ " ");
+
+    Matrica sloz(Matrica m){
+        Matrica mc = new Matrica(m.a, m.b);
+        for(int i = 0; i < m.a; i++) {
+            for (int j = 0; j < m.b; j++) {
+                mc.set(i, j, get(i,j)+m.get(i,j));
             }
-            System.out.println();
         }
-        System.out.println();
+        return mc;
     }
-    void umMat(int[][] m1, int[][] m2){
-        int[][] m = new int[m1.length][m1[0].length];
-        int r = 0;
-        for(int i = 0; i < m1.length || i < m2.length; i++) {
-            for (int j = 0; j < m1[i].length || j < m2[i].length; j++) {
-                if(m1.length < m1[i].length) {
-                    for (int k = 0; k < m1.length; k++) {
-                        r = r + (m1[i][k] * m2[k][j]);
+
+    Matrica unch(int u){
+        Matrica mc = new Matrica(a,b);
+        for(int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m[i].length; j++) {
+                mc.set(i, j, get(i,j)*u);
+            }
+        }
+        return mc;
+    }
+    Matrica umMat(Matrica m){
+        Matrica mc = new Matrica(a,b);
+        int r=0;
+        for(int i = 0; i < mc.a; i++) {
+            for (int j = 0; j < mc.b; j++) {
+                if(mc.a < mc.b) {
+                    for (int k = 0; k < mc.a; k++) {
+                        r = r + (get(i,k) * m.get(k,j));
                     }
                 }
                 else {
-                    for (int k = 0; k < m1[i].length; k++) {
-                        r = r + (m1[i][k] * m2[k][j]);
+                    for (int k = 0; k < mc.b; k++) {
+                        r = r + (get(i,k) * m.get(k,j));
                     }
                 }
-                m[i][j] = r;
-                r = 0;
-                System.out.print(m[i][j]+" ");
+                mc.set(i,j, r);
+                r=0;
             }
-            System.out.println();
         }
+        return mc;
     }
 }
 
